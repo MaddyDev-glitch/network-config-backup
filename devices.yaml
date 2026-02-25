@@ -1,0 +1,31 @@
+devices:
+  - name: rpi
+    ip: 192.168.1.110
+    username: pi
+    password: password
+    port: 22
+    method: ssh
+    interval: 10      # seconds
+    command: "lscpu"
+  # - name: core-switch-1
+  #   ip: 192.168.1.10
+  #   username: admin
+  #   password: cisco123
+  #   port: 22
+  #   method: ssh
+  #   command: "show running-config"
+  
+  # - name: edge-router-1
+  #   ip: 192.168.1.11
+  #   username: admin
+  #   password: cisco123
+  #   port: 830
+  #   method: netconf
+    
+  # - name: access-switch-1
+  #   ip: 192.168.1.12
+  #   username: admin
+  #   password: nokia123
+  #   port: 22
+  #   method: ssh
+  #   command: "show version"
