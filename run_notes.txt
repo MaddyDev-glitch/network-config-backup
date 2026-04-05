@@ -1,9 +1,9 @@
 # Build the image
-docker build -t hello-app .
+docker build -t network-config-backup .
 
 # Run the container (detached, so it runs in background)
-docker run -d --name hello-runner hello-app
+docker run -d --name network-config-backup network-config-backup
 
 # Check it's running and view output
 docker ps
-docker exec hello-runner tail -f output.txt
+docker exec network-config-backup tail -f output.txt
