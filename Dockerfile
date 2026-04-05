@@ -1,7 +1,14 @@
-FROM python:3.12-slim  # Lightweight Python base image [web:1]
+FROM python:3.12-slim
 
-WORKDIR /app            # Set working directory
+WORKDIR /app
 
-COPY hello.py .         # Copy your script into the container
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
-CMD ["python", "hello.py"]  # Auto-run the script on container start [web:2]
+COPY devices.yaml snapshotd.py ./
+
+# Declare the output directory as a mount point
+VOLUME ["/app/output"]
+
+# Run via shell so redirection works
+CMD ["/bin/sh", "-c", "python -u snapshotd.py 2>&1 > /app/output/log.txt"]

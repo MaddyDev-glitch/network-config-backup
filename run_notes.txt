@@ -1,9 +1,4 @@
-# Build the image
+docker rm network-config-backup -f
 docker build -t network-config-backup .
-
-# Run the container (detached, so it runs in background)
-docker run -d --name network-config-backup network-config-backup
-
-# Check it's running and view output
-docker ps
-docker exec network-config-backup tail -f output.txt
+docker run -d  -v "$(pwd)/output:/app/output" --name network-config-backup network-config-backup
+docker exec -it network-config-backup bash
