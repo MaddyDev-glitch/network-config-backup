@@ -14,6 +14,8 @@ from concurrent.futures import ThreadPoolExecutor
 import yaml
 import paramiko
 from ncclient import manager
+import xml.dom.minidom
+
 
 shutdown_flag = False
 
@@ -120,19 +122,25 @@ def netconf_collect(device):
         ) as m:
             
             config = m.get_config(source='running')
+            dom = xml.dom.minidom.parseString(config.xml)
+            pretty_xml = dom.toprettyxml(indent="  ")
+            # Optional: remove extra blank lines from minidom
+            pretty_xml = "\n".join(line for line in pretty_xml.splitlines() if line.strip())
+            # config = pretty_xml
         
         timestamp = int(time.time())
         filename = output_dir / f"{device['name']}_netconf_{timestamp}.xml"
-        
+
+
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(f"<!-- Device: {device['name']} ({device['ip']}:{device['port']}) -->\n")
             f.write(f"<!-- Method: NETCONF -->\n")
             f.write(f"<!-- Collected: {time.strftime('%Y-%m-%d %H:%M:%S')} -->\n")
-            f.write(f"<!-- Size: {len(config.xml)} bytes -->\n\n")
-            f.write(config.xml)
-        
-        print(f"[{device['name']}] ✓ Saved NETCONF config ({len(config.xml)} bytes) to {filename}")
-        
+            f.write(f"<!-- Size: {len(pretty_xml)} bytes -->\n\n")
+            f.write(pretty_xml)
+
+        print(f"[{device['name']}] ✓ Saved NETCONF config ({len(pretty_xml)} bytes) to {filename}")
+
     except Exception as e:
         print(f"[{device['name']}] ✗ NETCONF Error: {str(e)}")
 

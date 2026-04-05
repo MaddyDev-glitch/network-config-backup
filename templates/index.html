@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Config History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="app-header-title">
+          <p class="eyebrow">Network Config Backup</p>
+          <h1>Config History</h1>
+        </div>
+        <div class="app-header-actions">
+          <div id="deviceList" class="device-list header-device-list"></div>
+          <button id="refreshButton" class="ghost-button" type="button">Refresh</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="timeline-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">History</p>
+              <h2 id="timelineTitle">Select a device</h2>
+            </div>
+          </div>
+          <div id="changeList" class="change-list empty-state">No device selected.</div>
+        </section>
+
+        <section class="diff-panel">
+          <div class="panel-head diff-head">
+            <div>
+              <p class="eyebrow">Diff</p>
+              <h2 id="diffTitle">Choose a change</h2>
+            </div>
+            <div class="diff-toolbar">
+              <div class="meta-pills">
+                <span id="diffStatAdded" class="pill pill-added">+0</span>
+                <span id="diffStatRemoved" class="pill pill-removed">-0</span>
+                <span id="diffStatChanged" class="pill pill-changed">~0</span>
+              </div>
+              <label class="diff-toggle">
+                <input id="showFullDiffToggle" type="checkbox">
+                <span>Show full config</span>
+              </label>
+              <button id="copyDiffButton" class="ghost-button" type="button" disabled>Copy config</button>
+            </div>
+          </div>
+
+          <div class="diff-meta">
+            <div id="previousMeta" class="snapshot-meta"></div>
+            <div id="currentMeta" class="snapshot-meta"></div>
+          </div>
+
+          <div id="diffGrid" class="diff-grid empty-state">No change selected.</div>
+
+          <section class="notes-panel">
+            <div class="notes-head">
+              <div>
+                <p class="eyebrow">Notes</p>
+                <h3>Change commentary</h3>
+              </div>
+              <button id="saveNoteButton" class="primary-button" type="button" disabled>Save note</button>
+            </div>
+            <textarea id="noteInput" placeholder="Write why this change happened, who approved it, or what to watch next." disabled></textarea>
+            <p id="noteStatus" class="note-status"></p>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
