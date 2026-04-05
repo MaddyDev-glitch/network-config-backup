@@ -1,0 +1,15 @@
+# Device: rpi (192.168.1.110:22)
+# Method: SSH
+# Command: ls
+# Collected: 2026-02-27 20:18:21
+# Output length: 72 bytes
+
+Desktop
+Documents
+Downloads
+LEMI
+Music
+Pictures
+Public
+Templates
+Videos

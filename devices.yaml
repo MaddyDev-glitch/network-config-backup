@@ -1,12 +1,19 @@
 devices:
-  - name: rpi
-    ip: 192.168.1.110
-    username: pi
-    password: password
-    port: 22
-    method: ssh
+  # - name: rpi
+  #   ip: 192.168.1.110
+  #   username: pi
+  #   password: password
+  #   port: 22
+  #   method: ssh
+  #   interval: 10      # seconds
+  #   command: "ls"
+  - name: polt
+    ip: 192.168.1.100
+    username: root
+    password: root
+    port: 10830
+    method: netconf
     interval: 10      # seconds
-    command: "lscpu"
   # - name: core-switch-1
   #   ip: 192.168.1.10
   #   username: admin

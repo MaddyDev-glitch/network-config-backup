@@ -1,0 +1,9 @@
+# Build the image
+docker build -t hello-app .
+
+# Run the container (detached, so it runs in background)
+docker run -d --name hello-runner hello-app
+
+# Check it's running and view output
+docker ps
+docker exec hello-runner tail -f output.txt

@@ -103,7 +103,7 @@ def ssh_collect(device):
 
 def netconf_collect(device):
     """NETCONF get-config with ncclient"""
-    output_dir = Path('output')
+    output_dir = Path(f"output/{device['name']}")
     output_dir.mkdir(exist_ok=True)
     
     try:
